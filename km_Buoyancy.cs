@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using km_Lib;
 using KSP.IO;
 
 namespace KM_Lib
@@ -98,21 +99,25 @@ namespace KM_Lib
                 buoyancyForce = 0f;
             }
             if (isMaster) {
+                print ("DB11\n");
                 Utility.playAnimation (this.part, "inflate", isInflated, false, 1.0f);
-                Events ["toggleInflate"].guiActive = true;
-                Events ["toggleInflate"].guiActiveEditor = true;
-                Events ["toggleAutoDeploy"].guiActive = true;
-                Events ["toggleAutoDeploy"].guiActiveEditor = true;
-                Fields ["autoDeploy"].guiActive = true;
-                Fields ["buoyancyForceInflated"].guiActive = true;
+                print ("DB12\n");
+                if(Events ["toggleInflate"] != null)            Events ["toggleInflate"].guiActive          = true;
+                if(Events ["toggleInflate"] != null)            Events ["toggleInflate"].guiActiveEditor    = true;
+                if(Events ["toggleAutoDeploy"] != null)         Events ["toggleAutoDeploy"].guiActive       = true;
+                if(Events ["toggleAutoDeploy"] != null)         Events ["toggleAutoDeploy"].guiActiveEditor = true;
+                if(Fields ["autoDeploy"] != null)               Fields ["autoDeploy"].guiActive             = true;
+                if(Fields ["buoyancyForceInflated"] != null)    Fields ["buoyancyForceInflated"].guiActive  = true;
             } else {
+                print ("DB21\n");
                 Actions.Remove (Actions ["toggleInflateAG"]);
                 Actions.Remove (Actions ["toggleAutoDeployAG"]);
+                print ("DB22\n");
             }
 
 
 
-
+            print ("DB31\n");
             //defaultMinDrag = part.minimum_drag;
             //defaultMaxDrag = part.maximum_drag;
             if (forcePointName != string.Empty)
@@ -123,6 +128,7 @@ namespace KM_Lib
             {
                 forcePoint = part.transform;
             }
+            print ("DB32\n");
             if (isMaster && debugMode)
             {   Fields ["isInflated"].guiActive = true;
                 Fields ["ForceInflated"].guiActive = true;
@@ -135,6 +141,7 @@ namespace KM_Lib
                     Events["decreaseBuoyancyEvent"].guiName = "decrease buoy " + forcePointName;
                 }
             }
+            print ("DB33\n");
         }
 
         [KSPAction("Inflate / Deflate")]
@@ -189,9 +196,11 @@ namespace KM_Lib
         {
             if (!HighLogic.LoadedSceneIsFlight)
                 return;
+            print ("DB41\n");
             if (this.vessel.Splashed && isMaster && autoDeploy && !isInflated) {
                 toggleInflate ();
             }
+            print ("DB42\n");
             if (vessel.mainBody.ocean && part.rigidbody != null)
             {
                 if (part.partBuoyancy != null)
