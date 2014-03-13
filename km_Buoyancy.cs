@@ -50,6 +50,7 @@ namespace KM_Lib
         [KSPField]
         public string sound_deflate = "";
 
+
         [KSPField(isPersistant = true, guiName = "Inflated")] // remember if the part is inflated
         public bool isInflated = false;
 
@@ -59,7 +60,7 @@ namespace KM_Lib
         [KSPField(isPersistant = true, guiActive = false, guiActiveEditor = false, guiName = "Master")]
         public bool isMaster = true;
 
-        [KSPField(isPersistant = true, guiActive = false, guiActiveEditor = true, guiName = "Auto Deploy"),
+        [KSPField(isPersistant = true, guiActive = false, guiActiveEditor = false, guiName = "Auto Deploy"),
             UI_Toggle(disabledText="Disabled", enabledText="Enabled")]
         public bool autoDeploy = true;
 
@@ -107,6 +108,7 @@ namespace KM_Lib
                 if(Events ["toggleAutoDeploy"] != null)         Events ["toggleAutoDeploy"].guiActive       = true;
                 if(Events ["toggleAutoDeploy"] != null)         Events ["toggleAutoDeploy"].guiActiveEditor = true;
                 if(Fields ["autoDeploy"] != null)               Fields ["autoDeploy"].guiActive             = true;
+                if(Fields ["autoDeploy"] != null)               Fields ["autoDeploy"].guiActiveEditor       = true;
                 if(Fields ["buoyancyForceInflated"] != null)    Fields ["buoyancyForceInflated"].guiActive  = true;
             } else {
                 print ("DB21\n");
